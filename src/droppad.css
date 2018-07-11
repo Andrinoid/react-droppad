@@ -1,0 +1,59 @@
+.droppad {
+	background-color: #fff;
+	padding: 40px;
+}
+
+.droppad .header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 10px;
+}
+
+.droppad .header .smallCloud {
+	cursor: pointer;
+}
+
+.droppad.files-mode .header {
+	border-bottom: solid 1px #e2e2e2;
+}
+
+.dashed {
+	padding: 40px;
+	border: 2px dashed #e2e2e2;
+    outline-offset: -10px;
+    transition: ease all 0.3s;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.dashed .title {
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.dashed .subtitle {
+	color: #c7c7c7;
+	font-size: 16px;
+}
+
+.dashed .cloudIcon {
+	transform: scale(1);
+    transition: ease transform 0.3s;
+}
+
+
+.dragover .dashed, .dragenter .dashed {
+	border-color: #94cde1;
+}
+
+.dragover .dashed .cloudIcon, .dragenter .dashed .cloudIcon {
+	transform: scale(1.2) !important;
+}
+
+.dragleave {
+
+}
+
+.droppad-files {
+
+}

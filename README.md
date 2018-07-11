@@ -14,3 +14,7 @@ Describe react-droppad here.
 
 [coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/user/repo
+
+
+
+layout inspired by : https://dribbble.com/shots/2473854-Daily-UI-Day-031-File-Upload
