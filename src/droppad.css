@@ -1,25 +1,26 @@
 .droppad {
-	background-color: #fff;
-	padding: 40px;
+    background-color: #fff;
+    padding: 40px;
 }
 
 .droppad .header {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 	padding-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .droppad .header .smallCloud {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .droppad.files-mode .header {
-	border-bottom: solid 1px #e2e2e2;
+    border-bottom: solid 1px #e2e2e2;
 }
 
 .dashed {
-	padding: 40px;
-	border: 2px dashed #e2e2e2;
+    padding: 40px;
+    border: 2px dashed #e2e2e2;
     outline-offset: -10px;
     transition: ease all 0.3s;
     border-radius: 10px;
@@ -27,33 +28,59 @@
 }
 
 .dashed .title {
-	font-size: 24px;
-	font-weight: 400;
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .dashed .subtitle {
-	color: #c7c7c7;
-	font-size: 16px;
+    color: #c7c7c7;
+    font-size: 16px;
 }
 
 .dashed .cloudIcon {
-	transform: scale(1);
+    transform: scale(1);
     transition: ease transform 0.3s;
 }
 
-
-.dragover .dashed, .dragenter .dashed {
-	border-color: #94cde1;
+.dragover .dashed,
+.dragenter .dashed {
+    border-color: #94cde1;
 }
 
-.dragover .dashed .cloudIcon, .dragenter .dashed .cloudIcon {
-	transform: scale(1.2) !important;
+.dragover .dashed .cloudIcon,
+.dragenter .dashed .cloudIcon {
+    transform: scale(1.2) !important;
 }
 
-.dragleave {
+.dragleave {}
 
+.droppad-files {}
+
+
+/* animations from animate.css */
+/* note that aniamations are modified */
+/* https://github.com/daneden/animate.css */
+
+.animated {
+    animation-duration: 0.7s;
+    animation-fill-mode: both;
 }
 
-.droppad-files {
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
 
+.animated.delay-1s {
+	animation-delay: 1s;
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
 }

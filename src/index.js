@@ -18,7 +18,7 @@ class Droppad extends Component {
 
 		// class Variables
 		this.chunkTotal = {totals: 0, loads: 0}
-		this.filesLenght
+
 
 		this.state = {
 			stateCls: 'dragidle',
@@ -46,23 +46,8 @@ class Droppad extends Component {
     drop(e) {
     	noPropagation(e)
     	this.setState({stateCls: 'idle'})
-        
         var files = e.target.files || e.dataTransfer.files;
-		
-		/*
-        //Add reference id to each file so we can access it throug thumbnails
-        for(let i = 0; i < files.length; i++) {
-            files[i].uid = ++this.uid;
-        }
-        if (this.defaults.backgroundLoading) {
-            this.showAsBackground(files);
-        }
-        if (this.defaults.thumbnailLoading) {
-            this.createThumbnails(files);
-        }
-        */
         this.upload(files);
-        
 	}
 	
 	setDropMode() {
@@ -99,73 +84,17 @@ class Droppad extends Component {
 	    return errors;
 	}
 
-    uploadSingle(file, id) {
-
-	    let headers = {
-	        'X-Requested-With': 'XMLHttpRequest',
-	        'Accept': '*/*'
-	    };
-
-	    let formData = new FormData();
-
-	    let errors = this.validate(file);
-	    if (errors.length) {
-	        foreach(errors, (err) => {
-	            if (this.props.showErrors) {
-	                console.log(err)//TODO show error shomehow
-	            }
-	        });
-	        //TODO remove file if not allowed
-	        //this.remove(document.querySelectorAll('.uid-' + file.uid));
-	        return;
-	    }
-	    formData.append('file', file, file.name);
-
-	    let xhr = new XMLHttpRequest();
-	    //add tailing slash if doesn't exists
-	    let url = this.props.url;
-	    xhr.open('POST', url, true);
-	    for (var key in headers) {
-	        xhr.setRequestHeader(key, headers[key]);
-	    }
-
-	    xhr.onreadystatechange = (e) => {
-	        if (xhr.readyState !== 4)
-	            return;
-	        var data = attemptJson(xhr.responseText);
-	        if (xhr.status === 200) {
-	            //this.uploadSuccess(data, file);
-	        } else {
-	            //this.uploadError(data);
-	            //TODO show this to the user
-	        }
-	    };
-
-	    xhr.upload.addEventListener('progress', (e) => {
-	        this.chunkTotal.totals[id] = e.total;
-	        this.chunkTotal.loads[id] = e.loaded;
-	        this.uploadProgress();
-	    }, false);
-
-	    xhr.send(formData);
-	}
-
-	upload(files) {
+	upload(files) {//TODO rename method
 		console.log(files)
 		this.setState({
 			filesMode: true,
 		})
-	    this.chunkTotal = {
-	        totals: range(files.length, 0, 0),
-	        loads: range(files.length, 0, 0), // returns e.q [0,0,0] for three files
-	    };
-
-		this.filesLenght = files.length//Do I need this?
 		
 		let fileList = this.state.files
 	    for (let i = 0; i < files.length; i++) {
 	        let file = files[i];
 			let counter = i + 1;
+			file['delay'] = i;
 			fileList.push(file);
 			this.setState({files: fileList})
 	        if (counter > this.props.maxFiles) {
@@ -175,7 +104,6 @@ class Droppad extends Component {
 	            }
 	            break;
 	        }
-			// this.uploadSingle(file, i);
 	    }
 	}
 
@@ -204,13 +132,13 @@ class Droppad extends Component {
 				<div className="header">
 					<h3>{this.props.label}</h3>
 					<div>
-						{this.state.filesMode && <img src={uploadIconSmall} className="smallCloud" alt="upload" onClick={this.setDropMode}/>}
+						{this.state.filesMode && <img src={uploadIconSmall} className="smallCloud animated fadeInUp delay-1s" alt="upload" onClick={this.setDropMode}/>}
 					</div>
 				</div>
 
 				{/* droppad */}
 				{!this.state.filesMode && 
-					<div className="dashed">
+					<div className="dashed animated fadeInUp">
 						<img className="cloudIcon" src={uploadIcon} width="60" alt="upload" />
 						<p className="title">{this.props.title}</p>
 						<p className="subtitle">{this.props.subTitle}</p>
@@ -220,10 +148,9 @@ class Droppad extends Component {
 				{/* files list */}
 				{this.state.filesMode &&
 					<div className="droppad-files">
-						{this.state.files.map((file, i) => <FileItem key={i} file={file} />)}
+						{this.state.files.map((file, i) => <FileItem key={i} file={file} onSuccess={()=> {file['uploaded'] = true}} {...this.props} />)}
 					</div>
 				}
-				
 			</div>
 		)		
     }

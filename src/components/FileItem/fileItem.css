@@ -26,9 +26,10 @@
 }
 
 .fileItem .info .progress {
-    width: 100%;
+    width: 0%;
     height: 3px;
     background-color: #50b4e5;
     margin-top: 5px;
     border-radius: 5px;
+    transition: linear width 0.3s;
 }
