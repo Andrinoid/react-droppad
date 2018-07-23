@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ItemStatusIcon from '../ItemStatusIcon'
 import {noPropagation, range, foreach, attemptJson} from '../../utils'
 import imageIcon from '../../icons/imageIcon.svg'
 import './fileItem.css'
@@ -10,6 +11,7 @@ export default class FileItem extends Component {
 
         this.state = {
             progress: 0,
+            shouldAnimate: true,
             status: 'uploading'
         }
     }
@@ -18,7 +20,10 @@ export default class FileItem extends Component {
         if(!this.props.file.uploaded) {
             this.upload(this.props.file)
         } else {
-            this.setState({status: 'completed'})
+            this.setState({
+                status: 'completed',
+                shouldAnimate: false
+            })
         }
     }
 
@@ -106,14 +111,17 @@ export default class FileItem extends Component {
 
     render() {
         return (
-            <div className="fileItem animated fadeInUp">
+            <div className={`fileItem animated ${this.state.shouldAnimate && 'fadeInUp'}`}>
                 <div className="icon">
                     <img src={imageIcon} alt="file" />
                 </div>
                 <div className="info">
-                    <p className="filename">{this.props.file.name}</p>
+                    <div className="title-row">
+                        <div><p className="filename">{this.props.file.name}</p></div>
+                        <div className="icon"><ItemStatusIcon /></div>    
+                    </div>
                     {this.state.status === 'uploading' && <p className="status">Uploading</p>}
-                    {this.state.status === 'completed' && <p className="status animated fadeInUp">Completed</p>}
+                    {this.state.status === 'completed' && <p className={`status animated ${this.state.shouldAnimate && 'fadeInUp'}`}>Completed</p>}
                     <div className="progress" style={{width: this.state.progress + '%'}}></div>
                 </div>
             </div>
