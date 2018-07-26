@@ -1,7 +1,7 @@
 {
   "name": "react-droppad",
   "version": "1.0.0",
-  "description": "react-droppad React component",
+  "description": "Simple and out of the box nice looking HTML5 drag-drop component for React.js",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -28,10 +28,19 @@
     "react-dom": "^16.4.1"
   },
   "author": "Andri Birgisson",
-  "homepage": "",
+  "homepage": "https://github.com/Andrinoid/react-droppad",
   "license": "MIT",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andrinoid/react-droppad.git"
+  },
   "keywords": [
-    "react-component"
+    "react-component",
+    "react",
+    "drag",
+    "drop",
+    "upload",
+    "droppad",
+    "dropzone"
   ]
 }
