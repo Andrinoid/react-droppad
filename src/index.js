@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {noPropagation, range, foreach, attemptJson} from './utils'
+import {noPropagation} from './utils'
 import FileItem from './components/FileItem'
-import uploadIcon from './icons/upload.svg'
-import uploadIconSmall from './icons/upload-small.svg'
+import UploadIcon from './components/icons/Upload'
+import UploadSmallIcon from './components/icons/UploadSmall'
 import './droppad.css'
 
 class Droppad extends Component {
@@ -111,14 +111,15 @@ class Droppad extends Component {
 				<div className="header">
 					<h3>{this.props.label}</h3>
 					<div>
-						{this.state.filesMode && <img src={uploadIconSmall} className="smallCloud animated fadeInUp delay-1s" alt="upload" onClick={this.setDropMode}/>}
+						{this.state.filesMode && (<span className="smallCloud animated fadeInUp delay-1s" onClick={this.setDropMode}><UploadSmallIcon /></span>)}
 					</div>
 				</div>
 
 				{/* droppad */}
 				{!this.state.filesMode && 
 					<div className="dashed animated fadeInUp" onClick={this.click}>
-						<img className="cloudIcon" src={uploadIcon} width="60" alt="upload" />
+						{/* <img className="cloudIcon" src={uploadIcon} width="60" alt="upload" /> */}
+						<UploadIcon />
 						<p className="title">{this.props.title}</p>
 						<p className="subtitle">{this.props.subTitle}</p>
 					</div>
