@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import ItemStatusIcon from '../ItemStatusIcon'
-import {noPropagation, range, foreach, attemptJson} from '../../utils'
-import imageIcon from '../../icons/imageIcon.svg'
+import {foreach, attemptJson, formatBytes} from '../../utils'
+import DynamicFileIcon from './DynamicFileIcon'
 import './fileItem.css'
 
 export default class FileItem extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
             progress: 0,
             shouldAnimate: true,
-            status: 'uploading'
+			status: 'uploading',
+			errors: null
         }
     }
 
@@ -25,7 +25,11 @@ export default class FileItem extends Component {
                 shouldAnimate: false
             })
         }
-    }
+	}
+	
+	removeFile(file) {
+		//TODO remove file from list in parent component
+	}
 
     validate(_file) {
 	    let self = this;
@@ -34,12 +38,12 @@ export default class FileItem extends Component {
 	        function size(file) {
 	            const maxFilesize = self.props.maxFilesize * 1024 * 1024;
 	            if (file.size > maxFilesize) {
-	                errors.push(`File is ${self.formatBytes(file.size).human}. Thats larger than the maximum file size ${self.formatBytes(maxFilesize).human}`);
+	                errors.push(`File is ${formatBytes(file.size).human}. Thats larger than the maximum file size ${formatBytes(maxFilesize).human}`);
 	            }
 	        },
 	        function type(file) {
 	            const baseMimeType = file.type.split('/')[0];
-	            const mimeType = file.type.split('/')[1];
+				const mimeType = file.type.split('/')[1];
 	            let acceptedFiles = self.props.acceptedFiles.replace(/ /g, '').split(',');
 	            // Check if mimeType is allowed
 	            if (acceptedFiles.indexOf(mimeType) < 0) {
@@ -56,7 +60,6 @@ export default class FileItem extends Component {
 	}
 
     upload(file) {
-
 	    const headers = {
 	        'X-Requested-With': 'XMLHttpRequest',
 	        'Accept': '*/*'
@@ -66,13 +69,11 @@ export default class FileItem extends Component {
 
 	    let errors = this.validate(file);
 	    if (errors.length) {
-	        foreach(errors, (err) => {
-	            if (this.props.showErrors) {
-	                console.log(err)//TODO show error shomehow
-	            }
-	        });
-	        //TODO remove file if not allowed
-	        //this.remove(document.querySelectorAll('.uid-' + file.uid));
+			this.setState({
+				status: 'error',
+				errors: errors
+			})
+			
 	        return;
 	    }
 	    formData.append('file', file, file.name);
@@ -90,8 +91,9 @@ export default class FileItem extends Component {
 	            return;
 	        var data = attemptJson(xhr.responseText);
 	        if (xhr.status === 200) {
-                this.setState({status: 'completed'})
-                this.props.onSuccess()
+				this.setState({status: 'completed'})
+				this.props.onSuccess() //this callback will prevent the same file in the list from being uploaded again on next drop
+				this.props.onUploaded(data)
 	        } else {
 	            //this.uploadError(data);
 	            //TODO show this to the user
@@ -99,11 +101,7 @@ export default class FileItem extends Component {
 	    };
 
 	    xhr.upload.addEventListener('progress', (e) => {
-            console.log(e.loaded)
             this.setState({progress: (e.loaded / e.total * 100).toFixed()})
-            // this.chunkTotal.totals[id] = e.total;
-	        // this.chunkTotal.loads[id] = e.loaded;
-	        
 	    }, false);
 
 	    xhr.send(formData);
@@ -113,18 +111,19 @@ export default class FileItem extends Component {
         return (
             <div className={`fileItem animated ${this.state.shouldAnimate && 'fadeInUp'}`}>
                 <div className="icon">
-                    <img src={imageIcon} alt="file" />
+					<DynamicFileIcon label={this.props.file.type.split('/')[1]}/>
                 </div>
                 <div className="info">
                     <div className="title-row">
                         <div><p className="filename">{this.props.file.name}</p></div>
-                        <div className="icon"><ItemStatusIcon /></div>    
+                        <div className="icon"><span className="pointer" onClick={()=> {this.removeFile(this.props.file)}}><ItemStatusIcon complete={this.state.status === 'completed' ? true : false}/></span></div>
                     </div>
                     {this.state.status === 'uploading' && <p className="status">Uploading</p>}
                     {this.state.status === 'completed' && <p className={`status animated ${this.state.shouldAnimate && 'fadeInUp'}`}>Completed</p>}
+                    {this.state.status === 'error' && <p className={`status redtext animated ${this.state.shouldAnimate && 'fadeInUp'}`}><span className="bold">Error:</span> {this.state.errors.join(', ')}</p>}
                     <div className="progress" style={{width: this.state.progress + '%'}}></div>
                 </div>
             </div>
-        );
+        )
     }
 }

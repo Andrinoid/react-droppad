@@ -58,3 +58,44 @@ export function attemptJson(str) {
         return str;
     }
 }
+
+export function formatBytes(bytes) {
+    var kb = 1024;
+    var ndx = Math.floor(Math.log(bytes) / Math.log(kb));
+    var fileSizeTypes = [
+        "bytes",
+        "KB",
+        "MB",
+        "GB",
+        "TB",
+        "PB",
+        "EB",
+        "ZB",
+        "YB"
+    ];
+
+    return {
+        size: + (bytes / kb / kb).toFixed(2),
+        type: fileSizeTypes[ndx],
+        human: + (bytes / kb / kb).toFixed(2) + fileSizeTypes[ndx]
+    }
+}
+
+export function simpleMimeType(type) {
+    const mimeTypes = {
+        'jpeg': 'jpg',
+        'jpg': 'jpg',
+        'svg+xml': 'svg',
+        'vnd.ms-powerpoint': 'ppt',
+        'x-rar-compressed': 'rar',
+        '/x-tar': 'tar',
+        'typescript': 'ts',
+        'x-icon': 'ico',
+        'vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+        'msword': 'doc',
+        'plain': 'txt',
+        'vnd.adobe.photoshop': 'psd',
+        'x-iwork-keynote-sffkey': 'key'
+    }
+    return mimeTypes[type] || type
+}

@@ -25,6 +25,14 @@
     line-height: 14px;
 }
 
+.fileItem .info .redtext {
+    color: #FA8883;
+}
+
+.fileItem .info .bold {
+    font-weight: bold;
+}
+
 .fileItem .info .progress {
     width: 0%;
     height: 3px;
@@ -44,4 +52,8 @@
 
 .fileItem .title-row .icon {
     text-align: right;
+}
+
+.fileItem .pointer {
+    cursor: pointer;
 }

@@ -10,11 +10,13 @@ class Droppad extends Component {
 	constructor(props) {
 		super(props)
 		// Binded methods
+		this.click = this.click.bind(this)
 		this.dragenter = this.dragenter.bind(this)
 		this.dragover = this.dragover.bind(this)
 		this.dragleave = this.dragleave.bind(this)
 		this.drop = this.drop.bind(this)
 		this.setDropMode = this.setDropMode.bind(this)
+		this.input = null
 
 		// class Variables
 		this.chunkTotal = {totals: 0, loads: 0}
@@ -28,6 +30,10 @@ class Droppad extends Component {
 
 	}
 	//TODO remove envent on unmount
+	click(e) {
+		this.input.click()
+	}
+
 	dragenter(e) {
 		noPropagation(e)
         this.setState({stateCls: 'dragenter'})
@@ -44,6 +50,7 @@ class Droppad extends Component {
     }
 
     drop(e) {
+		console.log(e)
     	noPropagation(e)
     	this.setState({stateCls: 'idle'})
         var files = e.target.files || e.dataTransfer.files;
@@ -54,34 +61,6 @@ class Droppad extends Component {
 		this.setState({
 			filesMode: false
 		})
-	}
-
-    validate(_file) {
-	    let self = this;
-	    let errors = [];
-	    let tests = [
-	        function size(file) {
-	            const maxFilesize = self.props.maxFilesize * 1024 * 1024;
-	            if (file.size > maxFilesize) {
-	                errors.push(`File is ${self.formatBytes(file.size).human}. Thats larger than the maximum file size ${self.formatBytes(maxFilesize).human}`);
-	            }
-	        },
-	        function type(file) {
-	            const baseMimeType = file.type.split('/')[0];
-	            const mimeType = file.type.split('/')[1];
-	            let acceptedFiles = self.props.acceptedFiles.replace(/ /g, '').split(',');
-	            // Check if mimeType is allowed
-	            if (acceptedFiles.indexOf(mimeType) < 0) {
-	                errors.push(`File type ${mimeType} is not allowed`);
-	            }
-	        }
-	    ];
-
-	    foreach(tests, (fn) => {
-	        fn(_file);
-	    });
-
-	    return errors;
 	}
 
 	upload(files) {//TODO rename method
@@ -138,7 +117,7 @@ class Droppad extends Component {
 
 				{/* droppad */}
 				{!this.state.filesMode && 
-					<div className="dashed animated fadeInUp">
+					<div className="dashed animated fadeInUp" onClick={this.click}>
 						<img className="cloudIcon" src={uploadIcon} width="60" alt="upload" />
 						<p className="title">{this.props.title}</p>
 						<p className="subtitle">{this.props.subTitle}</p>
@@ -151,6 +130,7 @@ class Droppad extends Component {
 						{this.state.files.map((file, i) => <FileItem key={i} file={file} onSuccess={()=> {file['uploaded'] = true}} {...this.props} />)}
 					</div>
 				}
+				<input type="file" multiple="true" ref={(node) => { this.input = node; }} onChange={this.drop} style={{visibility: 'hidden', position: 'absolute', top: '-100px'}}/>
 			</div>
 		)		
     }
@@ -168,7 +148,8 @@ Droppad.defaultProps = {
 	title: 'Drag & drop',
 	subTitle: 'your files here or browse',
 	thumbnailLoading: false,
-	thumbnails: [] // ['http://example.jpg', 'http://example2.jpg']
+	thumbnails: [], // ['http://example.jpg', 'http://example2.jpg']
+	onUploaded: ()=>{}
 };
 
 export default Droppad
