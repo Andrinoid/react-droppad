@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import {noPropagation} from './utils'
+import {noPropagation, injectStyle} from './utils'
 import FileItem from './components/FileItem'
 import UploadIcon from './components/icons/Upload'
 import UploadSmallIcon from './components/icons/UploadSmall'
-import './droppad.css'
+import droppadStyles from './droppadStyles'
+// import './droppad.css'
 
 class Droppad extends Component {
 
@@ -27,6 +28,8 @@ class Droppad extends Component {
 			filesMode: false,
 			files: [],
 		}
+
+		injectStyle(droppadStyles, 'react-droppad-styles')
 
 	}
 	//TODO remove envent on unmount

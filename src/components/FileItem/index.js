@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import ItemStatusIcon from '../ItemStatusIcon'
-import {foreach, attemptJson, formatBytes} from '../../utils'
+import {foreach, attemptJson, formatBytes, injectStyle} from '../../utils'
 import DynamicFileIcon from './DynamicFileIcon'
-import './fileItem.css'
+import fileItemStyle from './fileItemStyles'
+// import './fileItem.css'
 
 export default class FileItem extends Component {
 
@@ -13,7 +14,8 @@ export default class FileItem extends Component {
             shouldAnimate: true,
 			status: 'uploading',
 			errors: null
-        }
+		}
+		injectStyle(fileItemStyle, 'react-droppad-fileitem-styles')
     }
 
     componentWillMount() {
