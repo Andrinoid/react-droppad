@@ -1,6 +1,6 @@
 {
   "name": "react-droppad",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple and out of the box nice looking HTML5 drag-drop component for React.js",
   "main": "lib/index.js",
   "module": "es/index.js",
