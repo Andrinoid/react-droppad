@@ -33,8 +33,6 @@ Then In your render function
 |subTitle     |string       |your files here or browse |                                      |
 |onUploaded   |function     |()=>{}                    |fired after upload with the response  |
 
-You can find more example of usage in the demo directory, which you can run in a local development server using npm start or yarn run start
-
-
+You can find example of usage in the demo directory, which you can run in a local development server using npm start or yarn run start
 
 layout inspired by : https://dribbble.com/shots/2473854-Daily-UI-Day-031-File-Upload
