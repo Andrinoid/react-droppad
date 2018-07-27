@@ -3,7 +3,6 @@ import ItemStatusIcon from '../ItemStatusIcon'
 import {foreach, attemptJson, formatBytes, injectStyle} from '../../utils'
 import DynamicFileIcon from './DynamicFileIcon'
 import fileItemStyle from './fileItemStyles'
-// import './fileItem.css'
 
 export default class FileItem extends Component {
 

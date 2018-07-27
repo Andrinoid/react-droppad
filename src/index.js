@@ -142,17 +142,12 @@ class Droppad extends Component {
 
 Droppad.defaultProps = {
 	url: '',
-	backgroundImage: '',
 	maxFilesize: 8, //in MB
 	maxFiles: 20,
-	paramName: "file", //TODO
 	acceptedFiles: 'jpeg, jpg, png, gif',
-	showErrors: true,
 	label: 'My files',
 	title: 'Drag & drop',
 	subTitle: 'your files here or browse',
-	thumbnailLoading: false,
-	thumbnails: [], // ['http://example.jpg', 'http://example2.jpg']
 	onUploaded: ()=>{}
 };
 

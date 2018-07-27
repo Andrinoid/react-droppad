@@ -21,6 +21,18 @@ Then In your render function
 <Droppad url="UPLOAD_URL" onUploaded={this.onUploaded}/>
 ``` 
 
-Check out the demo
+### Supported props
+|Prop         |Type         |Defualt                   |Description                           |
+|-------------|-------------|--------------------------|--------------------------------------|
+|url          |string       |''                        |Upload file to                        |
+|maxFiles     |integer      |20                        |How many files in multiple            |
+|maxFilesSize |integer      |8                         |define in MB                          |
+|acceptedFiles|string       |jpeg, jpg, png, gif       |Comma seperated string                | 
+|label        |string       |My files                  |                                      |
+|title        |string       |Drag & drop               |                                      |
+|subTitle     |string       |your files here or browse |                                      |
+|onUploaded   |function     |()=>{}                    |fired after upload with the response  |
+
+Check out the demo in this repo for an example
 
 layout inspired by : https://dribbble.com/shots/2473854-Daily-UI-Day-031-File-Upload
