@@ -61,10 +61,14 @@ export default class FileItem extends Component {
 	}
 
     upload(file) {
+		console.log(this.props.headers)
 	    const headers = {
 	        'X-Requested-With': 'XMLHttpRequest',
-	        'Accept': '*/*'
-	    };
+			'Accept': '*/*',
+			...this.props.headers
+		};
+		
+		console.log(headers)
 
 	    let formData = new FormData();
 

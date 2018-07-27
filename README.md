@@ -31,6 +31,7 @@ Then In your render function
 |label        |string       |My files                  |                                      |
 |title        |string       |Drag & drop               |                                      |
 |subTitle     |string       |your files here or browse |                                      |
+|headers      |object       |                          |Added to the xhr request headers      |
 |onUploaded   |function     |()=>{}                    |fired after upload with the response  |
 
 You can find example of usage in the demo directory, which you can run in a local development server using npm start or yarn run start

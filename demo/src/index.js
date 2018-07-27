@@ -24,9 +24,9 @@ class Demo extends Component {
     return (
     	<div className="container">
       		<h1>react-droppad Demo</h1>
-      		<Droppad url="https://tweecode.com/icloud/upload/ghostlamp" onUploaded={this.onUploaded}/>
+      		<Droppad url="https://tweecode.com/icloud/upload/ghostlamp" onUploaded={this.onUploaded} headers={{Authorization: 'JWT 123'}}/>
           <br/><hr/><br/>
-          {this.state.uploadedFiles.map((file, i) => <img key={i} src={'https://tweecode.com/' + file.image} alt="uploaded" />)}
+          {this.state.uploadedFiles.map((file, i) => <img key={i} src={'https://tweecode.com/' + file.image} alt="uploaded"/>)}
     	</div>
     )
   }

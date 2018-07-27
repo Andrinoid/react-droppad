@@ -67,7 +67,6 @@ class Droppad extends Component {
 	}
 
 	upload(files) {//TODO rename method
-		console.log(files)
 		this.setState({
 			filesMode: true,
 		})
@@ -148,6 +147,7 @@ Droppad.defaultProps = {
 	label: 'My files',
 	title: 'Drag & drop',
 	subTitle: 'your files here or browse',
+	headers: null,
 	onUploaded: ()=>{}
 };
 
