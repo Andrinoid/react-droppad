@@ -42,7 +42,7 @@ const droppadStyles = `
         font-size: 16px;
     }
 
-    .dashed .cloudIcon {
+    .dashed .cloudIcon svg {
         transform: scale(1);
         transition: ease transform 0.3s;
     }
@@ -52,8 +52,8 @@ const droppadStyles = `
         border-color: #94cde1;
     }
 
-    .dragover .dashed .cloudIcon,
-    .dragenter .dashed .cloudIcon {
+    .dragover .dashed .cloudIcon svg,
+    .dragenter .dashed .cloudIcon svg {
         transform: scale(1.2) !important;
     }
 

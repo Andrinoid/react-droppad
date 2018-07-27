@@ -122,7 +122,7 @@ class Droppad extends Component {
 				{!this.state.filesMode && 
 					<div className="dashed animated fadeInUp" onClick={this.click}>
 						{/* <img className="cloudIcon" src={uploadIcon} width="60" alt="upload" /> */}
-						<UploadIcon />
+						<span className="cloudIcon"><UploadIcon /></span>
 						<p className="title">{this.props.title}</p>
 						<p className="subtitle">{this.props.subTitle}</p>
 					</div>
