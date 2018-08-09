@@ -19,10 +19,6 @@ class Droppad extends Component {
 		this.setDropMode = this.setDropMode.bind(this)
 		this.input = null
 
-		// class Variables
-		this.chunkTotal = {totals: 0, loads: 0}
-
-
 		this.state = {
 			stateCls: 'dragidle',
 			filesMode: false,
@@ -53,7 +49,6 @@ class Droppad extends Component {
     }
 
     drop(e) {
-		console.log(e)
     	noPropagation(e)
     	this.setState({stateCls: 'idle'})
         var files = e.target.files || e.dataTransfer.files;
@@ -70,35 +65,30 @@ class Droppad extends Component {
 		this.setState({
 			filesMode: true,
 		})
-		
-		let fileList = this.state.files
+		let fileList = [];
 	    for (let i = 0; i < files.length; i++) {
-	        let file = files[i];
+			let file = files[i];
 			let counter = i + 1;
-			file['delay'] = i;
+			file['delay'] = i; //TODO
 			fileList.push(file);
-			this.setState({files: fileList})
 	        if (counter > this.props.maxFiles) {
-	            const err = 'The maximum amount of files you can upload is ' + this.props.maxFiles;
+				const errMsg = 'The maximum amount of files you can upload is ' + this.props.maxFiles;
 	            if (this.props.showErrors) {
-	                console.log(err)//TODO show error somehow
+					// push an error object insted of the files exieeding the max files
+					fileList.push({error: errMsg})
+					this.setState({
+						files: [...this.state.files, {error: errMsg}]
+					})
+					var cancel = true;
 	            }
-	            break;
-	        }
-	    }
+				break;
+			}
+		}
+		if(cancel) return
+		this.setState({
+			files: [...this.state.files, ...fileList]
+		})
 	}
-
-	uploadProgress() {
-        let loaded = this.chunkTotal.loads.reduce((a, b) => a + b, 0); // returns sum of array values
-        let total = this.chunkTotal.totals.reduce((a, b) => a + b, 0);
-        let percentage = (loaded / total * 100).toFixed();
-        console.log(percentage + '%');
-    }
-
-
-    uploadError(data) {
-        console.log('uppload error') //TODO show this in a component that will disappear
-    }
 
   	render() {
 
@@ -148,6 +138,7 @@ Droppad.defaultProps = {
 	title: 'Drag & drop',
 	subTitle: 'your files here or browse',
 	headers: null,
+	showErrors: true,
 	onUploaded: ()=>{}
 };
 

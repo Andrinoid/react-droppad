@@ -18,7 +18,8 @@ export default class FileItem extends Component {
     }
 
     componentWillMount() {
-        if(!this.props.file.uploaded) {
+		console.log(this.props.file)
+        if(!this.props.file.uploaded && !this.props.file.error) {
             this.upload(this.props.file)
         } else {
             this.setState({
@@ -50,7 +51,12 @@ export default class FileItem extends Component {
 	            if (acceptedFiles.indexOf(mimeType) < 0) {
 	                errors.push(`File type ${mimeType} is not allowed`);
 	            }
-	        }
+			},
+			function hasError(file) {
+				if(file.error) {
+					errors.push(file.error)
+				}
+			}
 	    ];
 
 	    foreach(tests, (fn) => {
@@ -61,14 +67,12 @@ export default class FileItem extends Component {
 	}
 
     upload(file) {
-		console.log(this.props.headers)
+		console.log(file)
 	    const headers = {
 	        'X-Requested-With': 'XMLHttpRequest',
 			'Accept': '*/*',
 			...this.props.headers
 		};
-		
-		console.log(headers)
 
 	    let formData = new FormData();
 
@@ -113,6 +117,22 @@ export default class FileItem extends Component {
     }
 
     render() {
+		if(this.props.file.error) {
+			return (
+				<div className={`fileItem animated ${this.state.shouldAnimate && 'fadeInUp'}`}>
+					<div className="icon">
+						<DynamicFileIcon label={'err'}/>
+                	</div>
+					<div className="info">
+						<div className="title-row">
+							<div><p className="filename">{this.props.file.error}</p></div>
+							<div className="icon"><span className="pointer" onClick={()=> {this.removeFile(this.props.file)}}><ItemStatusIcon complete={false}/></span></div>
+						</div>
+						<p className={`status redtext animated ${this.state.shouldAnimate && 'fadeInUp'}`}>Error</p>
+                	</div>
+				</div>
+			)
+		}
         return (
             <div className={`fileItem animated ${this.state.shouldAnimate && 'fadeInUp'}`}>
                 <div className="icon">
