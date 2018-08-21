@@ -26,8 +26,8 @@ export default class ItemStatusIcon extends Component {
     render() {
         return (
             <div style={wrapperStyle}>
-                <span style={spanStyle} className={`animated ${this.props.complete && 'rotateOut'}`}><Xmark /></span>
-                {this.props.complete && <span style={spanStyle} className="animated rotateIn"><Vmark /></span>}
+                <span style={spanStyle} className={`droppad_animated ${this.props.complete && 'droppad_rotateOut'}`}><Xmark /></span>
+                {this.props.complete && <span style={spanStyle} className="droppad_animated droppad_rotateIn"><Vmark /></span>}
             </div>
         );
     }

@@ -1,27 +1,27 @@
 const droppadStyles = `
-    .droppad {
+    .droppad_droppad {
         background-color: #fff;
         padding: 40px;
         position: relative;
         overflow: hidden;
     }
 
-    .droppad .header {
+    .droppad_droppad .droppad_header {
         display: flex;
         justify-content: space-between;
         padding-bottom: 10px;
         margin-bottom: 10px;
     }
 
-    .droppad .header .smallCloud {
+    .droppad_droppad .droppad_header .droppad_smallCloud {
         cursor: pointer;
     }
 
-    .droppad.files-mode .header {
+    .droppad_droppad.droppad_files-mode .droppad_header {
         border-bottom: solid 1px #e2e2e2;
     }
 
-    .dashed {
+    .droppad_dashed {
         padding: 40px;
         border: 2px dashed #e2e2e2;
         outline-offset: -10px;
@@ -32,45 +32,45 @@ const droppadStyles = `
         cursor: pointer;
     }
 
-    .dashed .title {
+    .droppad_dashed .droppad_title {
         font-size: 24px;
         font-weight: 400;
     }
 
-    .dashed .subtitle {
+    .droppad_dashed .droppad_subtitle {
         color: #c7c7c7;
         font-size: 16px;
     }
 
-    .dashed .cloudIcon svg {
+    .droppad_dashed .droppad_cloudIcon svg {
         transform: scale(1);
         transition: ease transform 0.3s;
     }
 
-    .dragover .dashed,
-    .dragenter .dashed {
+    .droppad_dragover .droppad_dashed,
+    .droppad_dragenter .droppad_dashed {
         border-color: #94cde1;
     }
 
-    .dragover .dashed .cloudIcon svg,
-    .dragenter .dashed .cloudIcon svg {
+    .droppad_dragover .droppad_dashed .droppad_cloudIcon svg,
+    .droppad_dragenter .droppad_dashed .droppad_cloudIcon svg {
         transform: scale(1.2) !important;
     }
 
-    .dragleave {}
+    .droppad_dragleave {}
 
-    .droppad-files {}
+    .droppad_droppad-files {}
 
     /* animations from animate.css */
     /* note that aniamations are modified to fit the needs of this component*/
     /* https://github.com/daneden/animate.css */
 
-    .animated {
+    .droppad_animated {
         animation-duration: 0.7s;
         animation-fill-mode: both;
     }
 
-    .animated.delay-1s {
+    .droppad_animated.droppad_delay-1s {
         animation-delay: 1s;
     }
 
@@ -85,7 +85,7 @@ const droppadStyles = `
         }
     }
 
-    .fadeInUp {
+    .droppad_fadeInUp {
         animation-name: fadeInUp;
     }
 
@@ -102,7 +102,7 @@ const droppadStyles = `
         }
     }
 
-    .rotateIn {
+    .droppad_rotateIn {
         animation-name: rotateIn;
     }
 
@@ -119,7 +119,7 @@ const droppadStyles = `
         }
     }
 
-    .rotateOut {
+    .droppad_rotateOut {
         animation-name: rotateOut;
     }
 `;

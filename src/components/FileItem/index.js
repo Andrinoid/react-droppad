@@ -119,34 +119,34 @@ export default class FileItem extends Component {
     render() {
 		if(this.props.file.error) {
 			return (
-				<div className={`fileItem animated ${this.state.shouldAnimate && 'fadeInUp'}`}>
-					<div className="icon">
+				<div className={`droppad_fileItem droppad_animated ${this.state.shouldAnimate && 'droppad_fadeInUp'}`}>
+					<div className="droppad_icon">
 						<DynamicFileIcon label={'err'}/>
                 	</div>
-					<div className="info">
-						<div className="title-row">
-							<div><p className="filename">{this.props.file.error}</p></div>
-							<div className="icon"><span className="pointer" onClick={()=> {this.removeFile(this.props.file)}}><ItemStatusIcon complete={false}/></span></div>
+					<div className="droppad_info">
+						<div className="droppad_title-row">
+							<div><p className="droppad_filename">{this.props.file.error}</p></div>
+							<div className="droppad_icon"><span className="droppad_pointer" onClick={()=> {this.removeFile(this.props.file)}}><ItemStatusIcon complete={false}/></span></div>
 						</div>
-						<p className={`status redtext animated ${this.state.shouldAnimate && 'fadeInUp'}`}>Error</p>
+						<p className={`droppad_status droppad_redtext droppad_animated ${this.state.shouldAnimate && 'droppad_fadeInUp'}`}>Error</p>
                 	</div>
 				</div>
 			)
 		}
         return (
-            <div className={`fileItem animated ${this.state.shouldAnimate && 'fadeInUp'}`}>
-                <div className="icon">
+            <div className={`droppad_fileItem droppad_animated ${this.state.shouldAnimate && 'droppad_fadeInUp'}`}>
+                <div className="droppad_icon">
 					<DynamicFileIcon label={this.props.file.type.split('/')[1]}/>
                 </div>
-                <div className="info">
-                    <div className="title-row">
-                        <div><p className="filename">{this.props.file.name}</p></div>
-                        <div className="icon"><span className="pointer" onClick={()=> {this.removeFile(this.props.file)}}><ItemStatusIcon complete={this.state.status === 'completed' ? true : false}/></span></div>
+                <div className="droppad_info">
+                    <div className="droppad_title-row">
+                        <div><p className="droppad_filename">{this.props.file.name}</p></div>
+                        <div className="droppad_icon"><span className="droppad_pointer" onClick={()=> {this.removeFile(this.props.file)}}><ItemStatusIcon complete={this.state.status === 'completed' ? true : false}/></span></div>
                     </div>
-                    {this.state.status === 'uploading' && <p className="status">Uploading</p>}
-                    {this.state.status === 'completed' && <p className={`status animated ${this.state.shouldAnimate && 'fadeInUp'}`}>Completed</p>}
-                    {this.state.status === 'error' && <p className={`status redtext animated ${this.state.shouldAnimate && 'fadeInUp'}`}><span className="bold">Error:</span> {this.state.errors.join(', ')}</p>}
-                    <div className="progress" style={{width: this.state.progress + '%'}}></div>
+                    {this.state.status === 'uploading' && <p className="droppad_status">Uploading</p>}
+                    {this.state.status === 'completed' && <p className={`droppad_status droppad_animated ${this.state.shouldAnimate && 'droppad_fadeInUp'}`}>Completed</p>}
+                    {this.state.status === 'error' && <p className={`droppad_status droppad_redtext droppad_animated ${this.state.shouldAnimate && 'droppad_fadeInUp'}`}><span className="droppad_bold">Error:</span> {this.state.errors.join(', ')}</p>}
+                    <div className="droppad_progress" style={{width: this.state.progress + '%'}}></div>
                 </div>
             </div>
         )

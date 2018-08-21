@@ -35,17 +35,17 @@ class Droppad extends Component {
 
 	dragenter(e) {
 		noPropagation(e)
-        this.setState({stateCls: 'dragenter'})
+        this.setState({stateCls: 'droppad_dragenter'})
     }
 
     dragover(e) {
     	noPropagation(e)
-        this.setState({stateCls: 'dragover'})
+        this.setState({stateCls: 'droppad_dragover'})
     }
 
     dragleave(e) {
     	noPropagation(e)
-        this.setState({stateCls: 'dragleave'})
+        this.setState({stateCls: 'droppad_dragleave'})
     }
 
     drop(e) {
@@ -94,32 +94,32 @@ class Droppad extends Component {
 
 		return (
 			<div
-				className={`droppad ${this.state.stateCls} ${this.state.filesMode ? 'files-mode' : 'drop-mode'}`}
+				className={`droppad_droppad ${this.state.stateCls} ${this.state.filesMode ? 'droppad_files-mode' : 'droppad_drop-mode'}`}
 				onDragEnter={this.dragenter}
 				onDragOver={this.dragover}
 				onDragLeave={this.dragleave}
 				onDrop={this.drop}>
 				{/* droppad header */}
-				<div className="header">
+				<div className="droppad_header">
 					<h3>{this.props.label}</h3>
 					<div>
-						{this.state.filesMode && (<span className="smallCloud animated fadeInUp delay-1s" onClick={this.setDropMode}><UploadSmallIcon /></span>)}
+						{this.state.filesMode && (<span className="droppad_smallCloud droppad_animated droppad_fadeInUp droppad_delay-1s" onClick={this.setDropMode}><UploadSmallIcon /></span>)}
 					</div>
 				</div>
 
 				{/* droppad */}
 				{!this.state.filesMode && 
-					<div className="dashed animated fadeInUp" onClick={this.click}>
+					<div className="droppad_dashed droppad_animated droppad_fadeInUp" onClick={this.click}>
 						{/* <img className="cloudIcon" src={uploadIcon} width="60" alt="upload" /> */}
-						<span className="cloudIcon"><UploadIcon /></span>
-						<p className="title">{this.props.title}</p>
-						<p className="subtitle">{this.props.subTitle}</p>
+						<span className="droppad_cloudIcon"><UploadIcon /></span>
+						<p className="droppad_title">{this.props.title}</p>
+						<p className="droppad_subtitle">{this.props.subTitle}</p>
 					</div>
 				}
 
 				{/* files list */}
 				{this.state.filesMode &&
-					<div className="droppad-files">
+					<div className="droppad_droppad-files">
 						{this.state.files.map((file, i) => <FileItem key={i} file={file} onSuccess={()=> {file['uploaded'] = true}} {...this.props} />)}
 					</div>
 				}

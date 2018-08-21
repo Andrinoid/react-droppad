@@ -1,40 +1,40 @@
 const fileItemStyles = `
-    .fileItem {
+    .droppad_fileItem {
         padding-top: 20px;
         display: flex;
     }
 
-    .fileItem  .icon {
+    .droppad_fileItem  .droppad_icon {
 
     }
 
-    .fileItem .info {
+    .droppad_fileItem .droppad_info {
         flex-grow: 1;
         padding-left: 20px;
     }
 
-    .fileItem .info .filename {
+    .droppad_fileItem .droppad_info .droppad_filename {
         font-size: 15px;
         font-weight: 600;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
-    .fileItem .info .status {
+    .droppad_fileItem .droppad_info .droppad_status {
         font-size: 12px;
         color: #c6c6c6;
         line-height: 14px;
     }
 
-    .fileItem .info .redtext {
+    .droppad_fileItem .droppad_info .droppad_redtext {
         color: #FA8883;
     }
 
-    .fileItem .info .bold {
+    .droppad_fileItem .droppad_info .droppad_bold {
         font-weight: bold;
     }
 
-    .fileItem .info .progress {
+    .droppad_fileItem .droppad_info .droppad_progress {
         width: 0%;
         height: 3px;
         background-color: #50b4e5;
@@ -43,19 +43,19 @@ const fileItemStyles = `
         transition: linear width 0.3s;
     }
 
-    .fileItem .title-row {
+    .droppad_fileItem .droppad_title-row {
         display: flex;
     }
 
-    .fileItem .title-row > div {
+    .droppad_fileItem .droppad_title-row > div {
         flex-grow: 1;
     }
 
-    .fileItem .title-row .icon {
+    .droppad_fileItem .droppad_title-row .droppad_icon {
         text-align: right;
     }
 
-    .fileItem .pointer {
+    .droppad_fileItem .droppad_pointer {
         cursor: pointer;
     }
 `;
